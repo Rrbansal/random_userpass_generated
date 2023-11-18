@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <title>Document</title>
+</head>
+<body class="flex justify-center bg-black">
+    <div class="h-auto w-96 border-2 border-white mt-40">
+        <h1 class="flex justify-center text-white text-3xl">Password Generator</h1>
+        <br>
+        <input type="text" id="dis" placeholder="click generate to view passwords" class="flex justify-center bg-white-500 ml-16 text-black w-60 border-1 border-white rounded">
+        <br>
+        <div class="flex justify-around">
+            <button class="bg-white border-2 rounded" onclick="generatepass()">generate</button>
+            <button class="bg-white border-2 rounded" onclick="ctc()">copy to clipboard</button>
+        </div>
+        <br>
+        <form action="">
+            <div class="flex justify-around">
+            <label for="" class="text-white">pass length</label>
+            <input type="number" name="" id="len" class="bg-white text-black">
+             </div>
+             <br>
+             <div class="flex justify-around text-white">
+            <label>include uppercase</label>
+            <input type="checkbox" name="" id="upper" >
+            </div>
+            <br>
+            <div class="flex justify-around text-white">
+            <label>include lowercase</label>
+            <input type="checkbox" name="" id="lower">
+            </div>
+            <br>
+            <div class="flex justify-around text-white">
+            <label>include numbers</label>
+            <input type="checkbox" name="" id="numbers">
+            </div>
+            <br>
+            <div class="flex justify-around text-white">
+            <label>include symbols</label>
+            <input type="checkbox" name="" id="symbols">
+        </div>
+        </form>
+    </div>
+
+</body>
+<script>
+    function generatepass()
+    {
+
+        var len1=document.getElementById("len").value;
+        var upp=document.getElementById("upper").checked;
+        var low=document.getElementById("lower").checked
+        var num=document.getElementById("numbers").checked
+        var sym=document.getElementById("symbols").checked
+
+        const charset = (
+                (upp ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "") +
+                (low ? "abcdefghijklmnopqrstuvwxyz" : "") +
+                (num ? "0123456789" : "") +
+                (sym ? "!@#$%^&*()-_=+[]{}|;:'\",.<>/?`~" : "")
+            );
+
+         let password=""
+            for(var i=0;i<len1;i++)
+            {
+                let ran=Math.floor(Math.random()*len1);
+                password+=charset.charAt(ran);
+            }
+
+            let display=document.getElementById("dis");
+            display.value=password
+
+    }
+
+    function ctc()
+    {
+        let display=document.getElementById("dis");
+        display.select();
+        document.execCommand("copy")
+        alert("Password copied to clipboard!");
+    }
+
+</script>
+</html>
